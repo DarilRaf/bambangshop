@@ -61,7 +61,7 @@ You can install Postman via this website: https://www.postman.com/downloads/
   - [x] Commit: `Implement add function in Subscriber repository.`
   - [x] Commit: `Implement list_all function in Subscriber repository.`
   - [x] Commit: `Implement delete function in Subscriber repository.`
-  - [ ] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
+  - [x] Write answers of your learning module's "Reflection Publisher-1" questions in this README.
 - **STAGE 2: Implement services and controllers**
   - [ ] Commit: `Create Notification service struct skeleton.`
   - [ ] Commit: `Implement subscribe function in Notification service.`
@@ -83,6 +83,12 @@ This is the place for you to write reflections:
 ### Mandatory (Publisher) Reflections
 
 #### Reflection Publisher-1
+
+1. For this case, a single Subscriber model struct should be sufficient. We don't necessarily need to define a separate trait or interface. The Subscriber struct already encapsulates the data and behavior (URL) required for the Observer pattern implementation. Since Rust doesn't have traditional inheritance, we can use composition to achieve the same effect as an interface, if needed.
+
+2. Using DashMap is a better choice than Vec because both id and url need to be unique. With a DashMap, we can use the id or url as the key, ensuring uniqueness, and store the corresponding Program or Subscriber struct as the value. A Vec would not guarantee uniqueness and would require additional checks to prevent duplicates.
+
+3. Using the DashMap library is a better choice than implementing the Singleton pattern in this case. The Singleton pattern is primarily used to ensure that a class has only one instance and provides a global point of access to that instance. However, in the case of the List of Subscribers, we need to store multiple Subscriber instances, and the DashMap provides a thread-safe way to manage and access this collection concurrently. Implementing the Singleton pattern would not address the thread-safety concerns for managing multiple Subscriber instances.
 
 #### Reflection Publisher-2
 
