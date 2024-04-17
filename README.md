@@ -74,7 +74,7 @@ You can install Postman via this website: https://www.postman.com/downloads/
   - [x] Commit: `Implement notify function in Notification service to notify each Subscriber.`
   - [x] Commit: `Implement publish function in Program service and Program controller.`
   - [x] Commit: `Edit Product service methods to call notify after create/delete.`
-  - [ ] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
+  - [x] Write answers of your learning module's "Reflection Publisher-3" questions in this README.
 
 ## Your Reflections
 
@@ -122,3 +122,24 @@ For my group project, Postman can be particularly useful for end-to-end testing 
 In future software engineering projects, especially those involving APIs or microservices, Postman will be a valuable tool for testing, debugging, and documenting the application's endpoints and expected behaviors.
 
 #### Reflection Publisher-3
+
+1. In this tutorial, we are using the Push model variation of the Observer Pattern. The main application (the publisher) is responsible for pushing notifications to the subscribers whenever there is a relevant event (e.g., new product created, product deleted, or product promoted).
+
+Specifically, in the notify function of the NotificationService in the main application, we iterate through the list of subscribers and call the update method on each subscriber, effectively pushing the notification data to them.
+
+2.  If we were to use the Pull model variation instead of the Push model, the advantages and disadvantages would be:
+
+Advantages:
+
+- The subscribers would have more control over when they receive updates, potentially reducing unnecessary network traffic or processing.
+- The publisher wouldn't need to maintain a list of subscribers, simplifying its implementation.
+
+Disadvantages:
+
+- Subscribers would need to periodically check for updates, which could be inefficient if updates are infrequent or if there are many subscribers.
+- There would be a higher risk of missing updates if a subscriber fails to check for updates at the right time.
+- Implementing the Pull model would require additional infrastructure or mechanisms for subscribers to query for updates, potentially making the system more complex.
+
+In the context of this tutorial, where we want to notify subscribers about new products, deletions, and promotions in a timely manner, the Push model is more suitable. The Pull model might introduce delays or missed notifications, which could be detrimental to the user experience.
+
+3. If we decide not to use multi-threading in the notification process, the program would become blocked or unresponsive while waiting for the notification HTTP requests to complete. This is because the notify function in the NotificationService would execute the update method on each subscriber sequentially, without spawning separate threads.
